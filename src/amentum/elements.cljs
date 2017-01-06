@@ -5,7 +5,6 @@
    [javelin.core :as j :refer [cell] :refer-macros [cell=]]
    [amentum.core :refer [->map]]))
 
-;; Other
 (defelem button [{:keys [class color icon] :or {class {}} :as attr} kids]
   ((-> attr
      (dissoc :color :icon)

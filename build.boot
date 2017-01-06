@@ -1,6 +1,6 @@
 (set-env!
-  :dependencies '[[adzerk/boot-cljs          "1.7.228-2"]
-                  [adzerk/boot-reload        "0.4.13"]
+  :dependencies '[[adzerk/boot-cljs          "1.7.228-2"   :scope "test"]
+                  [adzerk/boot-reload        "0.4.13"   :scope "test"]
                   [adzerk/bootlaces          "0.1.13"   :scope "test"]
                   [hoplon/hoplon             "6.0.0-alpha17"]
                   [org.clojure/clojure       "1.8.0"]
@@ -25,11 +25,9 @@
   []
   (comp
     (watch)
-    (speak)
     (hoplon)
-    (reload)
     (cljs)
-    (serve)))
+    (build-jar)))
 
 (deftask doc
   "Build Amentum Documentation"
@@ -53,7 +51,7 @@
 
 
 (task-options!
-  pom    {:project     'amentum
+  pom    {:project     'stratema/amentum
           :version     +version+
           :description "Amentum, a toolkit for Hoplon Web Development"
           :url         "https://github.com/stratema/amentum"
