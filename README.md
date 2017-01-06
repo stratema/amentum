@@ -1,11 +1,12 @@
-# amentum
+# Amentum
 
-A [Hoplon][3] project designed to...well, that part is up to you.
+Amentum, a toolkit for Hoplon Web Development
 
 ## Dependencies
 
 - java 1.7+
 - [boot][1]
+- [hoplon][3]
 
 ## Usage
 ### Development
