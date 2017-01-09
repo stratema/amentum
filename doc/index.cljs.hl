@@ -3,7 +3,7 @@
    [clojure.string :as s]
    [hoplon.jquery]
    [hoplon.core :as h]
-   [amentum.core :refer [numbers]]
+   [amentum.common :refer [numbers]]
    [amentum.collections :as c]
    [amentum.elements :as e]
    [amentum.modules :as m]
