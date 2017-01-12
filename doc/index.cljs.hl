@@ -2,20 +2,14 @@
   (:require
    [clojure.string :as s]
    [hoplon.jquery]
-   [hoplon.core :as h]
-   [amentum.common :refer [numbers]]
-   [amentum.collections :as c]
-   [amentum.elements :as e]
-   [amentum.modules :as m]
-   [amentum.doc.data :as d]))
+   [amentum.nav :as n]
+   [amentum.doc.route :as r]))
 
 (set! cljs.core/*print-fn* #(.log js/console %))
-(def values (map #(hash-map :value % :name (-> % numbers)) (range 1 17)))
-(def countries (map #(let [lc (-> % :code s/lower-case)]
-                       (assoc % :value lc :icon (str lc " flag"))) d/countries))
-(defelem example [{:keys [title] :as attr} kids]
-  ((h/div :class "example"
-     (when-tpl title (h/h4 :class "ui header" title))) attr kids))
+
+(with-init!
+  (n/setup-navigation)
+  (r/add-routes r/routes))
 
 (html
   (head
@@ -23,60 +17,9 @@
       :rel "stylesheet" :type "text/css")
     (link :href "doc.css" :rel "stylesheet" :type "text/css"))
   (body
-    (h/div :class "ui container"
-
-      (h1 "Hello, Hoplon!")
-
-      (h/div :class "ui vertical segment"
-        (c/grid
-          (c/row (c/column :wide 8 "a column"))
-          (c/row (e/button "Boring button"))
-          (c/row (e/button :icon "wifi" :color "green" "blah"))
-          (c/row (e/button :color "green" "This should be a green button"))
-          (c/row (e/button :class "large facebook" :icon "facebook" "Like me!"))
-          (c/row (c/column (e/button :class "fluid positive" "Large!")))
-          (c/row (let [c (cell "blah")]
-                   [(c/column :width 8 (c/input :state c))
-                    (c/column :width 8 (text "Value of c: ~{c}"))]))))
-
-      (h/div :class "ui vertical segment"
-        (h/h2 :class "ui dividing header" "Types")
-
-        (example :title "Dropdown"
-          (h/p "A dropdown")
-          (h/p "TODO: Allow dropdown to use provided set of item elements
-              rather than generating from a dataset"))
-
-        (example :title "Selection"
-          (h/p "A dropdown can be used to select between choices in a form")
-          (let [state (cell nil)
-                values [{:name "Male" :value 1} {:name "Female" :value 0}]]
-            (cell= (println "state:" state))
-            (m/dropdown :state state :values values :default "Gender")))
-
-        (example :title "Search Selection"
-          (h/p "A selection dropdown can allow a user to search through a
-              large list of choices.")
-
-          (let [state (cell nil)]
-            (cell= (println "state:" state))
-            (m/dropdown :class "fluid" :state state :values countries
-              :search true :default "Select Country")))
-
-        ((let [state (cell nil)]
-           (cell= (println "state:" state))
-           (m/dropdown
-             :state state :values values :search true :default "Gender")))
-
-        (example :title "Multiple Selection"
-          (h/p "A selection dropdown can allow multiple selections")
-          (h/p "TODO"))
-
-        (example :title "Multiple Search Selection"
-          (h/p "A selection dropdown can allow multiple search selections")
-          (h/p "TODO"))
-
-
-
-        ))
-    ))
+    (div :class "ui container"
+      (div :class "ui segment"
+        (p (a :href "/elements" "Elements"))
+        (p (a :href "/collections" "Collections")))
+      (div :class "ui segment"
+        (cell= (r/view))))))
