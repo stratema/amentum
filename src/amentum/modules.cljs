@@ -39,3 +39,9 @@
              (when-tpl icon (h/i :attr (cell= {:class icon})))
              (h/text "~{name} ~{icon}")))))
      :class class)))
+
+(defelem sidebar [attrs kids]
+  ;; TODO: Convert this into a real sidebar later
+  ;; TODO: Add cljs to activate this
+  ;; TODO: abstract out the "inverted vertical menu" part
+  ((h/div :class "ui vertical inverted sticky menu fixed top") attrs kids))

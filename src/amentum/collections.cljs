@@ -51,3 +51,7 @@
       (h/tbody kids))
     (when-tpl footers
       (h/thead (h/tr (for-tpl [f footers] (h/th f)))))))
+
+;; Menu ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defelem menu [attr kids] ((h/div :class "menu") attr kids))

@@ -1,9 +1,21 @@
 (page "index.html"
+  (:require-macros
+   [amentum.core :refer [match-tpl]])
   (:require
    [clojure.string :as s]
+   [cljs.core.match]
    [hoplon.jquery]
    [amentum.nav :as n]
-   [amentum.doc.route :as r]))
+   [amentum.collections :as c]
+   [amentum.elements :as e]
+   [amentum.modules :as m]
+   [amentum.views :as v]
+   [amentum.doc.route :as r]
+   [amentum.doc.views.main :as main]
+   [amentum.doc.views.collections :as collections]
+   [amentum.doc.views.elements :as elements]
+   [amentum.doc.views.modules :as modules]
+   [amentum.doc.views.views :as views]))
 
 (set! cljs.core/*print-fn* #(.log js/console %))
 
@@ -11,15 +23,58 @@
   (n/setup-navigation)
   (r/add-routes r/routes))
 
+(def main-content
+  (match-tpl r/path
+    [:main _ _] main/view
+    [:elements :button _] elements/button
+    [:elements :container _] elements/container
+    [:elements :icon _] elements/icon
+    [:elements :header _] elements/header
+    [:collections form _] collections/form
+    [:collections grid _] collections/grid
+    [:collections menu _] collections/menu
+    [:views :item _] views/item
+    [:modules :dropdown _] modules/dropdown
+    [:modules :sidebar _] modules/sidebar
+    :else main/view))
+
 (html
   (head
     (link :href "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css"
       :rel "stylesheet" :type "text/css")
-    (link :href "doc.css" :rel "stylesheet" :type "text/css"))
-  (body
-    (div :class "ui container"
-      (div :class "ui segment"
-        (p (a :href "/elements" "Elements"))
-        (p (a :href "/collections" "Collections")))
-      (div :class "ui segment"
-        (cell= (r/view))))))
+    (link :href "/doc.css" :rel "stylesheet" :type "text/css"))
+  (body :id "example" :class "pushable"
+    (div :class "pusher"
+      (div :class "full height"
+        (div :class "toc"
+          (m/sidebar
+            :attr {:style "width: 250px !important; height: 1813px !important;"}
+            (v/item
+              (e/header "Elements")
+              (c/menu
+                (v/item :href "/elements/button" "Button")
+                (v/item :href "/elements/container" "Container")
+                (v/item :href "/elements/icon" "Icon")
+                (v/item :href "/elements/header" "Header")))
+            (v/item
+              (e/header "Collections")
+              (c/menu
+                (v/item :href "/collections/form" "Form")
+                (v/item :href "/collections/grid" "Grid")
+                (v/item :href "/collections/menu" "Menu")))
+            (v/item
+              (e/header "Views")
+              (c/menu
+                (v/item :href "/elements/item" "Item")))
+            (v/item
+              (e/header "Modules")
+              (c/menu
+                (v/item :href "/modules/dropdown" "Dropdown")
+                (v/item :href "/modules/sidebar" "Sidebar")))))
+        (div :class "article"
+          (e/segment :class "masthead vertical"
+            (e/container
+              (div :class "introduction"
+                (h1 :class "ui header" "Title"
+                  (div :class "sub header" "subheader")))))
+          (e/container :class "main" main-content))))))

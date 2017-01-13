@@ -5,8 +5,11 @@
    [amentum.collections :as c]
    [amentum.elements :as e]))
 
-(h/defelem view []
+(h/defelem view [])
+
+(h/defelem button []
   (h/div :class "ui vertical segment"
+    (h/h2 :class "ui dividing header" "Types")
     (c/grid
       (c/row (c/column :wide 8 "a column"))
       (c/row (e/button "Boring button"))
@@ -17,3 +20,9 @@
       (c/row (let [c (j/cell "blah")]
                [(c/column :width 8 (c/input :state c))
                 (c/column :width 8 (h/text "Value of c: ~{c}"))])))))
+
+(h/defelem container [])
+
+(h/defelem icon [])
+
+(h/defelem header [])
