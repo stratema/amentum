@@ -6,19 +6,23 @@
    [amentum.common :refer [->map]]))
 
 ;; Non-UI Elements
-(defn icon [type] (h/i :class (str type " icon")))
+(defelem icon [attrs name]
+  ((h/i :class (str (first name) " icon")) attrs))
+(defelem label [attr kids] ((h/div :class "ui label") attr kids))
 (defelem header [attr kids] ((h/div :class "header") attr kids))
 
 ;; UI Elements
 (defelem segment [attr kids] ((h/div :class "ui segment") attr kids))
 (defelem container [attr kids] ((h/div :class "ui container") attr kids))
+(defelem buttons [attr kids] ((h/div :class "ui buttons") attr kids))
 
-(defelem button [{:keys [class color href] :or {class {}} :as attr} kids]
+(defelem button [{:keys [class color href tabindex type]
+                  :or {class {}} :as attr} kids]
   ((let [iname (:icon attr)
-         tag (if href h/a h/div)]
+         tag (cond type h/button href h/a :else h/div)]
      (-> attr
        (dissoc :color :icon)
-       (assoc :class (-> {:ui true :button true :icon icon}
+       (assoc :class (-> {:ui true :button true :icon iname}
                        (cond-> color (assoc (keyword color) true))))
        (tag (when iname (icon iname)))))
    :class class kids))

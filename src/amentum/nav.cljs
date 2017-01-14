@@ -69,7 +69,8 @@
 (defn setup-navigation []
   (.setEnabled history true)
   (events/listen js/document "click" on-document-click)
-  (events/listen history EventType/NAVIGATE on-history-navigate))
+  (events/listen history EventType/NAVIGATE on-history-navigate)
+  (push (.getPath (.parse Uri (.-location js/window))) nil))
 
 (defn dispatch-path! []
   (let [{:keys [path query] :as uri} (parse-uri (.-location js/window))]
