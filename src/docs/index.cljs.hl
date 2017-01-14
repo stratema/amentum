@@ -10,12 +10,12 @@
    [amentum.elements :as e]
    [amentum.modules :as m]
    [amentum.views :as v]
-   [amentum.doc.route :as r]
-   [amentum.doc.views.main :as main]
-   [amentum.doc.views.collections :as collections]
-   [amentum.doc.views.elements :as elements]
-   [amentum.doc.views.modules :as modules]
-   [amentum.doc.views.views :as views]))
+   [amentum.docs.route :as r]
+   [amentum.docs.views.main :as main]
+   [amentum.docs.views.collections :as collections]
+   [amentum.docs.views.elements :as elements]
+   [amentum.docs.views.modules :as modules]
+   [amentum.docs.views.views :as views]))
 
 (set! cljs.core/*print-fn* #(.log js/console %))
 

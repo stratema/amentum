@@ -1,14 +1,14 @@
 (set-env!
-  :dependencies '[[adzerk/boot-cljs          "1.7.228-2"   :scope "test"]
-                  [adzerk/boot-reload        "0.4.13"   :scope "test"]
-                  [adzerk/bootlaces          "0.1.13"   :scope "test"]
+  :dependencies '[[adzerk/boot-cljs          "1.7.228-2" :scope "test"]
+                  [adzerk/boot-reload        "0.4.13"    :scope "test"]
+                  [adzerk/bootlaces          "0.1.13"    :scope "test"]
                   [hoplon/hoplon             "6.0.0-alpha17"]
                   [secretary                 "1.2.3"]
                   [org.clojure/clojure       "1.8.0"]
                   [org.clojure/clojurescript "1.9.293"]
                   [org.clojure/core.match    "0.3.0-alpha4"]
                   [tailrecursion/boot-jetty  "0.1.3"]]
-  :source-paths #{"src"}
+  :source-paths #{"src/main"}
   :asset-paths  #{"assets"})
 
 (require
@@ -19,7 +19,7 @@
   '[tailrecursion.boot-jetty :refer [serve]])
 
 (def +version+ "0.1.0-SNAPSHOT")
-(bootlaces! +version+)
+(bootlaces! +version+ :dont-modify-paths? true)
 
 (deftask dev
   "Build Amentum for local development."
@@ -30,10 +30,10 @@
     (cljs)
     (build-jar)))
 
-(deftask doc
+(deftask docs
   "Build Amentum Documentation"
   []
-  (set-env! :source-paths #(conj % "doc"))
+  (set-env! :source-paths #(conj % "src/docs"))
   (comp
     (watch)
     (speak)
@@ -42,15 +42,15 @@
     (cljs)
     (serve)))
 
-(deftask docs
+(deftask gh-docs
   "Build Amentum Documentation for hosting on Github"
   []
-  (set-env! :source-paths #(conj % "doc"))
+  (set-env! :source-paths #(conj % "src/docs"))
   (comp
     (hoplon :bust-cache true)
     (cljs :optimizations :advanced)
     (prerender)
-    (target)))
+    (target :dir #{"docs"})))
 
 (deftask prod
   "Build Amentum for production deployment."

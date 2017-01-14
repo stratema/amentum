@@ -1,10 +1,10 @@
-(ns amentum.doc.route
+(ns amentum.docs.route
   (:require
    [javelin.core :refer-macros [defc defc= dosync]]
    [secretary.core :as sec]
-   [amentum.doc.views.main :as main]
-   [amentum.doc.views.elements :as elements]
-   [amentum.doc.views.collections :as collections]))
+   [amentum.docs.views.main :as main]
+   [amentum.docs.views.elements :as elements]
+   [amentum.docs.views.collections :as collections]))
 
 (defc path [])
 

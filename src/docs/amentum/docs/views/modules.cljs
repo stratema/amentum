@@ -1,10 +1,10 @@
-(ns amentum.doc.views.modules
+(ns amentum.docs.views.modules
   (:require
    [hoplon.core :as h]
    [javelin.core :as j]
    [amentum.modules :as m]
-   [amentum.doc.core :refer [example]]
-   [amentum.doc.data :refer [countries-nv genders]]))
+   [amentum.docs.core :refer [example]]
+   [amentum.docs.data :refer [countries-nv genders]]))
 
 (h/defelem dropdown []
   (h/div :class "ui vertical segment"

@@ -1,4 +1,4 @@
-(ns amentum.doc.views.main)
+(ns amentum.docs.views.main)
 
 (defn view []
   "Welcome!")

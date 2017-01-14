@@ -1,11 +1,11 @@
-(ns amentum.doc.views.elements
+(ns amentum.docs.views.elements
   (:require
    [clojure.string :as s]
    [hoplon.core :as h]
    [javelin.core :as j]
    [amentum.collections :as c]
    [amentum.elements :as e]
-   [amentum.doc.core :refer [section example]]))
+   [amentum.docs.core :refer [section example]]))
 
 (def colors ["red" "orange" "yellow" "olive" "green" "teal" "blue"
              "violet" "purple" "pink" "brown" "grey" "black"])

@@ -1,4 +1,4 @@
-(ns amentum.doc.data
+(ns amentum.docs.data
   (:require
    [clojure.string :as s]))
 

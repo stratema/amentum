@@ -1,4 +1,4 @@
-(ns amentum.doc.core
+(ns amentum.docs.core
   (:require
    [clojure.string :as s]
    [hoplon.core :as h]))
