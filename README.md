@@ -2,6 +2,11 @@
 
 Amentum, a toolkit for Hoplon Web Development
 
+## Documentation
+
+A full set of examples of how Amentum is used can be found
+[https://stratema.github.io/amentum][here].
+
 ## Dependencies
 
 - java 1.7+
