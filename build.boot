@@ -42,6 +42,16 @@
     (cljs)
     (serve)))
 
+(deftask docs
+  "Build Amentum Documentation for hosting on Github"
+  []
+  (set-env! :source-paths #(conj % "doc"))
+  (comp
+    (hoplon :bust-cache true)
+    (cljs :optimizations :advanced)
+    (prerender)
+    (target)))
+
 (deftask prod
   "Build Amentum for production deployment."
   []
