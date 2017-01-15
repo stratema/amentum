@@ -17,12 +17,12 @@ return [cljs.core.str(this$.pathPrefix_),cljs.core.str(token)].join('');
 }));
 if(typeof amentum.nav.history !== 'undefined'){
 } else {
-amentum.nav.history = (cljs.core.truth_(goog.history.Html5History.isSupported())?(function (){var G__15465 = (new goog.history.Html5History());
-G__15465.setUseFragment(false);
+amentum.nav.history = (cljs.core.truth_(goog.history.Html5History.isSupported())?(function (){var G__15533 = (new goog.history.Html5History());
+G__15533.setUseFragment(false);
 
-G__15465.setPathPrefix("");
+G__15533.setPathPrefix("");
 
-return G__15465;
+return G__15533;
 })():(new goog.History()));
 }
 /**
@@ -53,23 +53,23 @@ return null;
 })())].join('');
 });
 amentum.nav.push = (function amentum$nav$push(var_args){
-var args15481 = [];
-var len__7950__auto___15492 = arguments.length;
-var i__7951__auto___15493 = (0);
+var args15549 = [];
+var len__7950__auto___15560 = arguments.length;
+var i__7951__auto___15565 = (0);
 while(true){
-if((i__7951__auto___15493 < len__7950__auto___15492)){
-args15481.push((arguments[i__7951__auto___15493]));
+if((i__7951__auto___15565 < len__7950__auto___15560)){
+args15549.push((arguments[i__7951__auto___15565]));
 
-var G__15498 = (i__7951__auto___15493 + (1));
-i__7951__auto___15493 = G__15498;
+var G__15566 = (i__7951__auto___15565 + (1));
+i__7951__auto___15565 = G__15566;
 continue;
 } else {
 }
 break;
 }
 
-var G__15487 = args15481.length;
-switch (G__15487) {
+var G__15555 = args15549.length;
+switch (G__15555) {
 case 1:
 return amentum.nav.push.cljs$core$IFn$_invoke$arity$1((arguments[(0)]));
 
@@ -79,7 +79,7 @@ return amentum.nav.push.cljs$core$IFn$_invoke$arity$2((arguments[(0)]),(argument
 
 break;
 default:
-throw (new Error([cljs.core.str("Invalid arity: "),cljs.core.str(args15481.length)].join('')));
+throw (new Error([cljs.core.str("Invalid arity: "),cljs.core.str(args15549.length)].join('')));
 
 }
 });
@@ -102,11 +102,11 @@ var target = ((cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(tag_name,"A"))?e.tar
 if(cljs.core.truth_(target)){
 var href = target.href;
 var title = target.title;
-var map__15502 = amentum.nav.parse_uri(href);
-var map__15502__$1 = ((((!((map__15502 == null)))?((((map__15502.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__15502.cljs$core$ISeq$)))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__15502):map__15502);
-var u = map__15502__$1;
-var path = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__15502__$1,cljs.core.cst$kw$path);
-var fragment = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__15502__$1,cljs.core.cst$kw$fragment);
+var map__15570 = amentum.nav.parse_uri(href);
+var map__15570__$1 = ((((!((map__15570 == null)))?((((map__15570.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__15570.cljs$core$ISeq$)))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__15570):map__15570);
+var u = map__15570__$1;
+var path = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__15570__$1,cljs.core.cst$kw$path);
+var fragment = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__15570__$1,cljs.core.cst$kw$fragment);
 var route = secretary.core.locate_route(path);
 if(cljs.core.truth_(route)){
 amentum.nav.push.cljs$core$IFn$_invoke$arity$2(amentum.nav.pqf(u),title);
@@ -132,11 +132,11 @@ goog.events.listen(amentum.nav.history,goog.history.EventType.NAVIGATE,amentum.n
 return amentum.nav.push.cljs$core$IFn$_invoke$arity$2(goog.Uri.parse(window.location).getPath(),null);
 });
 amentum.nav.dispatch_path_BANG_ = (function amentum$nav$dispatch_path_BANG_(){
-var map__15506 = amentum.nav.parse_uri(window.location);
-var map__15506__$1 = ((((!((map__15506 == null)))?((((map__15506.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__15506.cljs$core$ISeq$)))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__15506):map__15506);
-var uri = map__15506__$1;
-var path = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__15506__$1,cljs.core.cst$kw$path);
-var query = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__15506__$1,cljs.core.cst$kw$query);
+var map__15574 = amentum.nav.parse_uri(window.location);
+var map__15574__$1 = ((((!((map__15574 == null)))?((((map__15574.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__15574.cljs$core$ISeq$)))?true:false):false))?cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.hash_map,map__15574):map__15574);
+var uri = map__15574__$1;
+var path = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__15574__$1,cljs.core.cst$kw$path);
+var query = cljs.core.get.cljs$core$IFn$_invoke$arity$2(map__15574__$1,cljs.core.cst$kw$query);
 if((cljs.core.not_EQ_.cljs$core$IFn$_invoke$arity$2(path,"/")) && (cljs.core.not_EQ_.cljs$core$IFn$_invoke$arity$2(path,"/home"))){
 return secretary.core.dispatch_BANG_(amentum.nav.pqf(uri));
 } else {
