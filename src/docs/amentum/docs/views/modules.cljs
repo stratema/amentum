@@ -6,8 +6,11 @@
    [amentum.docs.core :refer [example]]
    [amentum.docs.data :refer [countries-nv genders]]))
 
-(h/defelem dropdown []
-  (h/div :class "ui vertical segment"
+(defn dropdown []
+  {:header "Dropdown"
+   :sub-header ""
+   :content
+   (h/div :class "ui vertical segment"
     (h/h2 :class "ui dividing header" "Types")
 
     (example :title "Dropdown"
@@ -39,6 +42,6 @@
 
     (example :title "Multiple Search Selection"
       (h/p "A selection dropdown can allow multiple search selections")
-      (h/p "TODO "))))
+      (h/p "TODO ")))} )
 
 (h/defelem sidebar [])

@@ -1,4 +1,5 @@
 (page "index.html"
+  (:refer-hoplon :exclude [header])
   (:require-macros
    [amentum.core :refer [match-tpl]])
   (:require
@@ -11,7 +12,7 @@
    [amentum.modules :as m]
    [amentum.views :as v]
    [amentum.docs.route :as r]
-   [amentum.docs.views.main :as main]
+   [amentum.docs.views.start :as start]
    [amentum.docs.views.collections :as collections]
    [amentum.docs.views.elements :as elements]
    [amentum.docs.views.modules :as modules]
@@ -25,7 +26,7 @@
 
 (def main-content
   (match-tpl r/path
-    [:main _ _] main/view
+    [:start _ _] start/view
     [:elements :button _] elements/button
     [:elements :container _] elements/container
     [:elements :icon _] elements/icon
@@ -36,7 +37,11 @@
     [:views :item _] views/item
     [:modules :dropdown _] modules/dropdown
     [:modules :sidebar _] modules/sidebar
-    :else main/view))
+    :else start/view))
+
+(defc= header (:header main-content))
+(defc= sub-header (:sub-header main-content))
+(defc= content (:content main-content))
 
 (html
   (head
@@ -75,6 +80,6 @@
           (e/segment :class "masthead vertical"
             (e/container
               (div :class "introduction"
-                (h1 :class "ui header" "Title"
-                  (div :class "sub header" "subheader")))))
-          (e/container :class "main" main-content))))))
+                (h1 :class "ui header" header
+                  (div :class "sub header" sub-header)))))
+          (e/container :class "main" content))))))
