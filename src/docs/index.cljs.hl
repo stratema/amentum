@@ -36,7 +36,7 @@
     [:views :item _] views/item
     [:modules :dropdown _] modules/dropdown
     [:modules :sidebar _] modules/sidebar
-    :else main/view))
+    :else elements/button))
 
 (html
   (head

@@ -22,7 +22,7 @@
          tag (cond type h/button href h/a :else h/div)]
      (-> attr
        (dissoc :color :icon)
-       (assoc :class (-> {:ui true :button true :icon iname}
+       (assoc :class (-> {:ui true :button true :icon (and iname (empty? kids))}
                        (cond-> color (assoc (keyword color) true))))
        (tag (when iname (icon iname)))))
    :class class kids))
