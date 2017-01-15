@@ -47,10 +47,14 @@
   []
   (set-env! :source-paths #(conj % "src/docs"))
   (comp
-    (hoplon :bust-cache true)
-    (cljs :optimizations :advanced)
+    (hoplon)
+    (cljs :optimizations :advanced
+      :compiler-options {:asset-path "/index.html.out"
+                         :parallel-build true})
     (prerender)
     (target :dir #{"docs"})))
+
+
 
 (deftask prod
   "Build Amentum for production deployment."
