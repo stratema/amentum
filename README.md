@@ -14,35 +14,36 @@ A (not yet) full set of examples of how Amentum is used can be found
 - [hoplon][3]
 
 ## Usage
-### Development
+### Developing with Amentum
 1. Start the `dev` task. In a terminal run:
     ```bash
     $ boot dev
     ```
-    This will give you a  Hoplon development setup with:
-    - auto compilation on file changes
-    - audible warning for compilation success or failures
-    - auto reload the html page on changes
-    - Clojurescript REPL
 
-2. Go to [http://localhost:8000][2] in your browser. You should see "Hello, Hoplon!".
+    This will automatically build Amentum, create a jar and install
+    that in your local maven repository as Amentum is not yet in Clojars.
 
-3. If you edit and save a file, the task will recompile the code and reload the
-   browser to show the updated version.
+2.  You can then require Amentum in your project as normal by requiring
+    ```
+    [stratema/amentum "0.1.0-SNAPSHOT"]
+    ```
+    in your build.boot or project.clj file.
 
-### Production
-1. Run the `prod` task. In a terminal run:
-    ```bash
-    $ boot prod
+### Developing Amentum itself
+1.  Start the docs task. In a terminal run:
+    ```
+    $ boot docs
     ```
 
-2. The compiled files will be on the `target/` directory. This will use
-   advanced compilation and prerender the html.
+    Go to [http://localhost:3020][2] in your browser. You should see
+    the welcome page of the Amentum documentation site. Boot is
+    configured to automatically reload changes made to Amentum core or
+    the docs site in your browser.
 
 ## License
 
-Copyright © 2017, **Your Name Goes Here**
+Copyright © 2017, Stratema Ltd.
 
 [1]: http://boot-clj.com
-[2]: http://localhost:8000
+[2]: http://localhost:3020
 [3]: http://hoplon.io
