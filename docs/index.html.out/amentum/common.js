@@ -3,8 +3,8 @@ goog.provide('amentum.common');
 goog.require('cljs.core');
 goog.require('clojure.string');
 amentum.common.__GT_map = (function amentum$common$__GT_map(kvs){
-var m = (function (p1__13113_SHARP_){
-return cljs.core.zipmap(p1__13113_SHARP_,cljs.core.repeat.cljs$core$IFn$_invoke$arity$1(true));
+var m = (function (p1__13201_SHARP_){
+return cljs.core.zipmap(p1__13201_SHARP_,cljs.core.repeat.cljs$core$IFn$_invoke$arity$1(true));
 });
 if(cljs.core.map_QMARK_(kvs)){
 return kvs;

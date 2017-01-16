@@ -54,13 +54,14 @@
         (div :class "toc"
           (m/sidebar
             :attr {:style "width: 250px !important; height: 1813px !important;"}
+            (v/item :href "/start" "Start")
             (v/item
               (e/header "Elements")
               (c/menu
                 (v/item :href "/elements/button" "Button")
                 (v/item :href "/elements/container" "Container")
-                (v/item :href "/elements/icon" "Icon")
-                (v/item :href "/elements/header" "Header")))
+                (v/item :href "/elements/header" "Header")
+                (v/item :href "/elements/icon" "Icon")))
             (v/item
               (e/header "Collections")
               (c/menu
