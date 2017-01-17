@@ -30,6 +30,7 @@
     [:elements :button _] elements/button
     [:elements :container _] elements/container
     [:elements :icon _] elements/icon
+    [:elements :input _] elements/input
     [:elements :header _] elements/header
     [:collections form _] collections/form
     [:collections grid _] collections/grid
@@ -37,7 +38,7 @@
     [:views :item _] views/item
     [:modules :dropdown _] modules/dropdown
     [:modules :sidebar _] modules/sidebar
-    :else start/view))
+    :else elements/input))
 
 (defc= header (:header main-content))
 (defc= sub-header (:sub-header main-content))
@@ -47,7 +48,7 @@
   (head
     (link :href "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css"
       :rel "stylesheet" :type "text/css")
-    (link :href "doc.css" :rel "stylesheet" :type "text/css"))
+    (link :href "http://semantic-ui.com/stylesheets/docs.css" :rel "stylesheet" :type "text/css"))
   (body :id "example" :class "pushable"
     (div :class "pusher"
       (div :class "full height"
@@ -61,7 +62,8 @@
                 (v/item :href "/elements/button" "Button")
                 (v/item :href "/elements/container" "Container")
                 (v/item :href "/elements/header" "Header")
-                (v/item :href "/elements/icon" "Icon")))
+                (v/item :href "/elements/icon" "Icon")
+                (v/item :href "/elements/input" "Input")))
             (v/item
               (e/header "Collections")
               (c/menu

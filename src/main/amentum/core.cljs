@@ -3,4 +3,5 @@
    [clojure.string :as s]
    [amentum.collections]
    [amentum.elements]
-   [amentum.modules]))
+   [amentum.modules]
+   [amentum.views]))

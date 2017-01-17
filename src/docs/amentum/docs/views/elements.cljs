@@ -1,28 +1,14 @@
 (ns amentum.docs.views.elements
   (:require
-   [amentum.docs.core :refer-macros [example-with-source]]
+   [cljs.pprint]
+   [amentum.docs.core :refer-macros [example-with-source example-with-state]]
    [clojure.string :as s]
    [hoplon.core :as h]
    [javelin.core :as j]
    [amentum.collections :as c]
    [amentum.elements :as e]
-   [amentum.docs.core :refer [section example]]))
-
-(def colors ["red" "orange" "yellow" "olive" "green" "teal" "blue"
-             "violet" "purple" "pink" "brown" "grey" "black"])
-
-(def lorem "Lorem ipsum dolor sit amet, consectetur adipiscing
-  elit. Curabitur a orci ac ante ultricies mattis. Nunc elementum quam
-  et mauris iaculis viverra.")
-
-(def networks
-  [["facebook" "Facebook"]
-   ["twitter" "Twitter"]
-   ["google plus" "Google Plus"]
-   ["vk" "VK"]
-   ["linkedin" "LinkedIn"]
-   ["instagram" "Instagram"]
-   ["youtube" "YouTube"]])
+   [amentum.docs.core :refer [section example]]
+   [amentum.docs.data :refer [colors lorem networks web-content-icons]]))
 
 (defn button []
   {:header "Button"
@@ -107,8 +93,8 @@
 
       (example-with-source :class "another"
         (e/button :class "left labeled" :tabindex 0
-         (e/button :class "basic blue" (e/icon "fork") "Fork")
-         (e/label :class "basic left pointing blue" "1,048")))
+          (e/button :class "basic blue" (e/icon "fork") "Fork")
+          (e/label :class "basic left pointing blue" "1,048")))
 
       (example-with-source :title "Icon"
         (h/p "A button can have only an icon")
@@ -126,10 +112,12 @@
 
       (example-with-source :class "another spaced"
         (let [c ["primary" "secondary" "positive" "negative"]]
-          (map #(e/button :class (str % " basic") (s/capitalize %)) c)))
+          (e/bvs
+            (map #(e/button :class (str % " basic") (s/capitalize %)) c))))
 
       (example-with-source :class "another spaced"
-        (map #(e/button :color % :class "basic" (s/capitalize %)) colors))
+        (e/bvs
+          (map #(e/button :color % :class "basic" (s/capitalize %)) colors)))
 
       (example-with-source :title "Inverted" :class "spaced"
         (h/p "A button can be formatted to appear on dark backgrounds")
@@ -149,10 +137,11 @@
 
       (example-with-source :title "Icon Buttons"
         (h/p "Button groups can show groups of icons")
-        [(e/buttons (map #(e/button :icon (str "align " %))
-                      ["left" "center" "right" "justify"]))
-         (e/buttons (map #(e/button :icon (str "align " %))
-                      ["bold" "underline" "text width"]))]))
+        (e/bvs
+          (e/buttons (map #(e/button :icon (str "align " %))
+                       ["left" "center" "right" "justify"]))
+          (e/buttons (map #(e/button :icon (str "align " %))
+                       ["bold" "underline" "text width"])))))
 
     (section :title "Content"
       (example-with-source :title "Conditionals"
@@ -173,42 +162,45 @@
 
       (example-with-source :title "Loading"
         (h/p "A button can show a loading indicator")
-        (map #(e/button :class (str "ui " % " loading") "Loading")
-          ["" "basic" "primary" "sceonday"])))
+        (e/bvs
+          (map #(e/button :class (str "ui " % " loading") "Loading")
+            ["" "basic" "primary" "secondary"]))))
 
     (section :title "Variations"
       (example-with-source :title "Social" :class "spaced"
         (h/p "A button can be formatted to link to a social website")
-        (map (fn [[n l]] (e/button :class n :icon n l)) networks))
+        (e/bvs
+          (map (fn [[n l]] (e/button :class n :icon n l)) networks)))
 
       (example-with-source :title "Size" :class "spaced"
         (h/p "A button can have different sizes")
         (let [sizes ["mini" "tiny" "small" "medium" "large" "big"
                      "huge" "massive"]]
-          (map #(e/button :class % (s/capitalize %)) sizes)))
+          (e/bvs (map #(e/button :class % (s/capitalize %)) sizes))))
 
       (example-with-source :title "Floated"
         (h/p "A button can be aligned to the left or right of its container")
-        [(e/button :class "right floated" "Right Floated")
-         (e/button :class "left floated" "Left Floated")])
+        (e/bvs
+          (e/button :class "right floated" "Right Floated")
+          (e/button :class "left floated" "Left Floated")))
 
       (example-with-source :title "Colored" :class "spaced"
         (h/p "A button can have different colors")
-        (map #(e/button :class % (s/capitalize %)) colors))
+        (e/bvs
+          (map #(e/button :class % (s/capitalize %)) colors)))
 
       (example-with-source :title "Compact"
         (h/p "A button can reduce its padding to fit into tighter spaces")
-        [(e/button :class "compact" "Hold")
-         (e/button :class "compact" :icon "pause")
-         ;; TODO: Fix logic on when to add 'icon' class to button
-         (e/button :class "compact icon labeled" :icon "pause" "Pause")])
+        (e/bvs
+          (e/button :class "compact" "Hold")
+          (e/button :class "compact" :icon "pause")
+          (e/button :class "compact icon labeled" :icon "pause" "Pause")))
 
-      (example-with-source :title "Toggle"
+      (example-with-state :title "Toggle"
         (h/p "A button can be formatted to toggle on and off")
-        (let [c (j/cell false)]
-          (e/button :class (j/cell= {:toggle true :active c})
-            :click #(swap! c not)
-            (j/cell= (if c "Voted" "Vote")))))
+        (e/button :class (j/cell= {:toggle true :active state})
+          :click #(swap! state not)
+          (j/cell= (if state "Voted" "Vote"))))
 
       (example-with-source :title "Positive"
         (h/p "A button can hint towards a positive consequence")
@@ -233,9 +225,10 @@
 
       (example-with-source :title "Vertically Attached"
         (h/p "A button can be attached to the top or bottom of other content")
-        [(e/button :class "top attached" :tabindex 0 "Top")
-         (e/segment :class "attached" (h/p lorem))
-         (e/button :class "bottom attached" :tabindex 0 "Bottom")])
+        (e/bvs
+          (e/button :class "top attached" :tabindex 0 "Top")
+          (e/segment :class "attached" (h/p lorem))
+          (e/button :class "bottom attached" :tabindex 0 "Bottom")))
 
       (example-with-source :class "another"
         [(e/buttons :class "two top attached"
@@ -277,10 +270,9 @@
       (example-with-source :title "Equal Width"
         (h/p "Groups can have their widths divided evenly")
         (let [s ["Overview" "Specs" "Warranty" "Reviews" "Support"]]
-          [(e/buttons :class "five"
-             (map #(e/button %) (take 5 s)))
-           (e/buttons :class "three"
-             (map #(e/button %) (take 3 s)))]))
+          (e/bvs
+            (e/buttons :class "five" (map #(e/button %) (take 5 s)))
+            (e/buttons :class "three" (map #(e/button %) (take 3 s))))))
 
       (example-with-source :title "Colored Buttons"
         (h/p "Groups can have a shared color")
@@ -290,9 +282,10 @@
       (example-with-source :title "Basic Buttons"
         (h/p "A button group can be less pronounced")
         (let [n ["One" "Two" "Three"]]
-          [(e/buttons :class "basic" (map #(e/button %) n))
-           (h/div :class "class ui divider")
-           (e/buttons :class "vertical basic" (map #(e/button %) n))]))
+          (e/bvs
+            (e/buttons :class "basic" (map #(e/button %) n))
+            (h/div :class "class ui divider")
+            (e/buttons :class "vertical basic" (map #(e/button %) n)))))
 
       (example-with-source :class "another"
         (let [n [["red" "One"] ["blue" "Two"] ["green" "Three"]]]
@@ -319,31 +312,6 @@
    :sub-header "A container limits content to a maximum width"
    :content nil})
 
-(def web-content-icons
-  ["add to calendar" "alarm outline" "alarm mute outline" "alarm mute" "alarm"
-   "at" "browser" "bug" "calendar outline" "calendar" "checked calendar" "cloud"
-   "code" "comment outline" "comment" "comments outline" "comments" "copyright"
-   "creative commons" "dashboard" "delete calendar" "external square" "external"
-   "eyedropper" "feed" "find" "hand pointer" "hashtag" "heartbeat" "history"
-   "home" "hourglass empty" "hourglass end" "hourglass full" "hourglass half"
-   "hourglass start" "idea" "image" "inbox" "industry" "lab" "mail outline"
-   "mail square" "mail" "mouse pointer" "options" "paint brush" "payment"
-   "percent" "privacy" "protect" "registered" "remove from calendar" "search"
-   "setting" "settings" "shop" "shopping bag" "shopping basket" "signal"
-   "sitemap" "tag" "tags" "tasks" "terminal" "text telephone" "ticket"
-   "trademark" "trophy" "wifi"])
-
-(defn icon []
-  {:header "Icon"
-   :sub-header "An icon is a glyph used to represent something else"
-   :content
-   (section :title "Icon Set"
-     (h/p "An icon set contains an arbitrary number of glyphs")
-     (example-with-source :title "Web Content" :class "icon"
-       (h/p "Icons can represent types of content found on websites")
-       (c/grid :class "doubling five column"
-         (map #(c/column (e/icon %) (s/capitalize %)) web-content-icons))))})
-
 (defn header []
   {:header "Header"
    :sub-header "A header provides a short summary of content"
@@ -356,7 +324,8 @@
                using rem and are not affected by surrounding content size.")
        (let [hs [[e/h1 "First"] [e/h2 "Second"] [e/h3 "Third"]
                  [e/h4 "Fourth"] [e/h5 "Fifth"]]]
-         (map (fn [[e t]] [(e t) (h/p lorem)]) hs)))
+         (e/segment :class "vertical"
+           (map (fn [[e t]] [(e t) (h/p lorem)]) hs))))
 
      (example-with-source :title "Content Headers"
        (h/p "Headers may be oriented to give the importance of a
@@ -364,13 +333,63 @@
        (h/div :class "ui ignored info message" "Content headings are
        sized with em and are based on the font-size of their
        container.")
-       [(let [font-size (j/cell 10)]
-          [(e/buttons
-             (e/button :icon "plus" :click #(swap! font-size inc))
-             (e/button :icon "minus" :click #(swap! font-size dec)))
-           (e/segment :class "vertical"
-             :css (j/cell= {:font-size (str font-size "pt")})
-             (map (fn [[e s t]] [(e :class s t) (h/p lorem)])
-               [[e/h1 "huge" "First"] [e/h2 "large" "Second"]
-                [e/h3 "medium" "Third"] [e/h4 "small" "Fourth"]
-                [e/h5 "tiny" "Fifth"]]))])]))})
+       (let [font-size (j/cell 10)]
+         [(e/buttons
+            (e/button :icon "plus" :click #(swap! font-size inc))
+            (e/button :icon "minus" :click #(swap! font-size dec)))
+          (e/segment :class "vertical"
+            :css (j/cell= {:font-size (str font-size "pt")})
+            (map (fn [[e s t]] [(e :class s t) (h/p lorem)])
+              [[e/h1 "huge" "First"] [e/h2 "large" "Second"]
+               [e/h3 "medium" "Third"] [e/h4 "small" "Fourth"]
+               [e/h5 "tiny" "Fifth"]]))])))})
+
+(defn icon []
+  {:header "Icon"
+   :sub-header "An icon is a glyph used to represent something else"
+   :content
+   (section :title "Icon Set"
+     (h/p "An icon set contains an arbitrary number of glyphs")
+     (example-with-source :title "Web Content" :class "icon"
+       (h/p "Icons can represent types of content found on websites")
+       (c/grid :class "doubling five column"
+         (map #(c/column (e/icon %) (s/capitalize %)) web-content-icons))))})
+
+(defn input []
+  {:header "Input"
+   :sub-header "An input is a field used to elicit a response from a user"
+   :content
+   [(section :title "Types"
+      (example-with-state :title "Labeled"
+        (h/p "A button can appear alongside a "
+          (h/a :href "/elements/label" "Label"))
+        (e/input :state state :input #(reset! state @%))))
+
+    (section :title "States"
+      (example-with-source :title "Focus"
+        (h/p "An input field can show a user is currently interacting with it")
+        (e/input :class "focus"))
+
+      (example-with-state :title "Loading"
+        (h/p "An icon input field can show that it is currently loading data")
+        (e/input :state state :input #(reset! state @%)
+          :placeholder "Type something to start searching..."
+          :class (j/cell= {:left true :icon true :fluid true
+                           :loading (seq state)})
+          (e/icon "search")))
+
+      (example-with-source :title "Disabled"
+        (h/p "An input field can show that it is disabled")
+        (e/input :class "disabled" :placeholder "Search..."))
+
+      (example-with-state :title "Error"
+        (h/p "An input field can show the data contains errors")
+        (e/input :state state :input #(reset! state @%)
+          :placeholder "Don't type more than 5 characters..."
+          :class (j/cell= {:fluid true :error (> (count state) 5)}))))
+
+    (section :title "Variations"
+      (h/p "Please the Semantic-UI site for documentation on input variations"
+        (h/br)
+        (h/a :href "http://semantic-ui.com/elements/input.html#variations"
+          "http://semantic-ui.com/elements/input.html#variations")))]})

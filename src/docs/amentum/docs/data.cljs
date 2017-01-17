@@ -2,6 +2,36 @@
   (:require
    [clojure.string :as s]))
 
+(def colors ["red" "orange" "yellow" "olive" "green" "teal" "blue"
+             "violet" "purple" "pink" "brown" "grey" "black"])
+
+(def lorem "Lorem ipsum dolor sit amet, consectetur adipiscing
+  elit. Curabitur a orci ac ante ultricies mattis. Nunc elementum quam
+  et mauris iaculis viverra.")
+
+(def networks
+  [["facebook" "Facebook"]
+   ["twitter" "Twitter"]
+   ["google plus" "Google Plus"]
+   ["vk" "VK"]
+   ["linkedin" "LinkedIn"]
+   ["instagram" "Instagram"]
+   ["youtube" "YouTube"]])
+
+(def web-content-icons
+  ["add to calendar" "alarm outline" "alarm mute outline" "alarm mute" "alarm"
+   "at" "browser" "bug" "calendar outline" "calendar" "checked calendar" "cloud"
+   "code" "comment outline" "comment" "comments outline" "comments" "copyright"
+   "creative commons" "dashboard" "delete calendar" "external square" "external"
+   "eyedropper" "feed" "find" "hand pointer" "hashtag" "heartbeat" "history"
+   "home" "hourglass empty" "hourglass end" "hourglass full" "hourglass half"
+   "hourglass start" "idea" "image" "inbox" "industry" "lab" "mail outline"
+   "mail square" "mail" "mouse pointer" "options" "paint brush" "payment"
+   "percent" "privacy" "protect" "registered" "remove from calendar" "search"
+   "setting" "settings" "shop" "shopping bag" "shopping basket" "signal"
+   "sitemap" "tag" "tags" "tasks" "terminal" "text telephone" "ticket"
+   "trademark" "trophy" "wifi"])
+
 (def countries
   [{:name "Afghanistan" :code "AF"}
    {:name "Åland Islands" :code "AX"}

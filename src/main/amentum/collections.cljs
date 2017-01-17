@@ -28,7 +28,11 @@
 
 (defelem form  [attr kids] ((h/div :class "ui form") attr kids))
 (defelem field [attr kids] ((h/div :class "field") attr kids))
+
+;; DEPRECATED: Input is best represented as the single input element
+;; instead of bundling it with label and field
 (defelem input [{:keys [id label state value] :as attr} kids]
+  (.warn js/console "amentum.collections/input is deprecated")
   (field [(when label (h/label :for id label))
           (-> attr
             (dissoc :label :state)

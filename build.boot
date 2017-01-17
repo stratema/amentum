@@ -20,7 +20,7 @@
 (require
   '[adzerk.bootlaces         :refer :all]
   '[adzerk.boot-cljs         :refer [cljs]]
-  '[adzerk.boot-cljs-repl :refer [cljs-repl cljs-repl-env start-repl]]
+  '[adzerk.boot-cljs-repl    :refer [cljs-repl cljs-repl-env start-repl]]
   '[adzerk.boot-reload       :refer [reload]]
   '[hoplon.boot-hoplon       :refer [hoplon prerender]]
   '[tailrecursion.boot-jetty :refer [serve]])

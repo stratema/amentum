@@ -10,8 +10,9 @@
     (h/h2 :class "ui dividing header" title)
     kids))
 
-(h/defelem example [{:keys [title source] :as attr} kids]
+(h/defelem example [{:keys [title source state] :as attr} kids]
   (let [show (when source (j/cell false))
+        ppstate (j/cell= (with-out-str (cljs.pprint/pprint state)))
         [body examples] (split-at (- (count kids) (:count source 0)) kids)
         anchor (and title (-> title s/lower-case (s/replace #" " "-")))
         source-text (:text source)
@@ -26,8 +27,15 @@
          examples
          (e/label :class "top attached" "Example"
            (e/icon "copy link")))
+       (h/when-tpl (contains? attr :state)
+         (h/div :class (j/cell= {:annotation true :transition true
+                                 :visible show :hidden (not show)})
+           (e/segment :class "instructive attached"
+             (e/label :class "top attached" "State")
+             (h/pre :text ppstate))))
        (h/div :class (j/cell= {:annotation true :transition true
                                :visible show :hidden (not show)})
          (e/segment :class "instructive bottom attached"
+           (e/label :class "top attached" "Source")
            (h/pre (h/code :class "code" :html source-text)))))
      attr)))

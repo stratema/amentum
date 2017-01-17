@@ -37,7 +37,7 @@
            (h/div :class (cell= {:item true :active (= state value)})
              :data-value value :click #(do (update! @value) (toggle))
              (when-tpl icon (h/i :attr (cell= {:class icon})))
-             (h/text "~{name} ~{icon}")))))
+             (h/text "~{name}")))))
      :class class)))
 
 (defelem sidebar [attrs kids]
